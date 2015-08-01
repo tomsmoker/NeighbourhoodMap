@@ -1,5 +1,27 @@
-<div id="map"></div>
-
-<div id="menu">
-    <h1>This is where the search bar will be</h1>
-</div>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Perth Coffee</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://maps.googleapis.com/maps/api/js?libraries=places"></script>
+    <script src="js/lib/jquery.min.js"></script>
+    <script src="js/app.js"></script>
+</head>
+<body>
+    <input id="search-box" class="controls" type="text" placeholder="Get searching">
+    <div id="marker-list" class="controls">
+        <ul style="list-style-type:none; padding-left:0">
+            <li style="border-bottom: solid; border-width: thin">
+                <h3 style="padding-bottom: 0; margin-bottom: 0">Name</h1>
+                info
+            </li>
+            <li style="border-bottom: solid; border-width: thin">
+                <h3 style="padding-bottom: 0; margin-bottom: 0">Name</h1>
+                info
+            </li>
+        </ul>
+    </div>
+    <div id="map-canvas"></div>
+</body>
+</html>
