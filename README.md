@@ -1,12 +1,18 @@
-# NeighbourhoodMap
+# Perth Coffee
 The fifth project for the Udacity Front End Nanodegree
 
-Steps:
+DONE
 
 Add a map background using Google Maps API (Done)
-Need to initialise a model: Pick ten coffee shops or so
-Add map markers (Tentative)
- - I want to add map markers for coffee shops (Done)
- - (Need to possibly add variants of this for search?)
-Need to be able to search and filter map locations (By what?)
-API: Instagram (TBD)
+Need to initialise a model: Pick ten coffee shops or so (Done)(Might add more later)
+Add map markers (Done)
+Need to be able to search and filter map locations (Done)
+Implement a list view (Done)
+
+TODO
+
+Make map markers clickable and viewable APIs
+AJAX Requests
+- API: Instagram (TBD)
+- Maybe one more (yelp? zomato?)
+Make look nicer via CSS
