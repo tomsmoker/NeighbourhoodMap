@@ -19,10 +19,12 @@ var CoffeeShop = function(data) {
   //Will have to put Instagram API in here at some point
 
   //Create markers for each coffee shop
+  //Have them drop in when first opened
   self.marker = new google.maps.Marker({
-      position: self.latLng(),
       map: null,
-      title: self.name()
+      position: self.latLng(),
+      title: self.name(),
+      animation: google.maps.Animation.DROP
   });
 
   //This displays the marker (nested ifs because it was flicking on and off)
@@ -64,8 +66,33 @@ var ViewModel = function() {
         }
     }
     //Making sure the array is sorted
-    return possibleShops.sort(function (l, r) { return l.name() > r.name() ? 1 : -1;});
+    return possibleShops.sort(function (l, r) {
+      return l.name() > r.name() ? 1 : -1;
+    });
   });
+
+  //Need to add a listener for markers to be clicked
+  self.locations().forEach(function(coffeeShop) {
+    google.maps.event.addListener(coffeeShop.marker, 'click', function() {
+      self.handleClick(coffeeShop);
+    });
+  });
+
+  //Now to animate the markers
+  self.handleClick = function(coffeeShop) {
+    //Zoom in when clicked (only to 18, any more is jarring)
+    map.setZoom(18);
+    //Still not sure if this is the best, but will do for now
+    //Makes the whole experience very jolting
+    map.setCenter(coffeeShop.latLng());
+    //Bounce markers with a time out of 800
+    coffeeShop.marker.setAnimation(google.maps.Animation.BOUNCE);
+    setTimeout(
+      function(){
+        coffeeShop.marker.setAnimation(null);
+      },
+    800);
+  };
 
 };
 
