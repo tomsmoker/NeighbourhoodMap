@@ -15,6 +15,8 @@ TODO
 
 Populate pop up box with external info
 AJAX Requests
-- API: Instagram
 - API: Zomato
 Make look nicer via CSS
+Add offline.js for connection handling (is this necessary?)
+Make sure it works on mobile
+Normalize?
