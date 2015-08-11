@@ -3,7 +3,7 @@
 
 //First thing done is to create the map (Set to Perth CBD)
 var map = new google.maps.Map(document.getElementById('google_map'), {
-    zoom: 17,
+    zoom:  17,
     center: {
       lat: -31.95351,
       lng: 115.85705
@@ -12,18 +12,18 @@ var map = new google.maps.Map(document.getElementById('google_map'), {
 
 //Setting up each coffee shop as an item
 var CoffeeShop = function(data) {
-  var self = this;
-  self.name = ko.observable(data.name);
+  var self     = this;
+  self.name    = ko.observable(data.name);
   self.address = ko.observable(data.address);
-  self.latLng = ko.observable(new google.maps.LatLng(data.lat, data.lng));
+  self.latLng  = ko.observable(new google.maps.LatLng(data.lat, data.lng));
   //Will have to put Instagram API in here at some point
 
   //Create markers for each coffee shop
   //Have them drop in when first opened
   self.marker = new google.maps.Marker({
-      map: null,
-      position: self.latLng(),
-      title: self.name(),
+      map:       null,
+      position:  self.latLng(),
+      title:     self.name(),
       animation: google.maps.Animation.DROP
   });
 
@@ -33,16 +33,24 @@ var CoffeeShop = function(data) {
       if (self.marker.map === null) {
         self.marker.setMap(map);
       }
-    } else {
+    }
+    else {
       self.marker.setMap(null);
     }
   };
 };
 
+//Create the basic structure of the pop up box, to use later
+var popupInfo =
+  "<div id='popup' class='popup'>" +
+    "<h2 id='popupTitle' class='popupTitle'></h2>" +
+    "</div>" +
+  "</div>";
+
 //Making sure I dissociate the worries
 var ViewModel = function() {
-  var self = this;
 
+  var self          = this;
   self.searchString = ko.observable('');
 
   //Create an array to store the coffee shops
@@ -53,7 +61,7 @@ var ViewModel = function() {
 
   //Filter the possible locations based on what's typed into the search bar
   self.filteredLocations = ko.computed(function() {
-    var possibleShops = [],
+    var possibleShops  = [],
         locationLength = self.locations().length;
 
     //Making it look nice
@@ -61,7 +69,8 @@ var ViewModel = function() {
         if (self.locations()[i].name().toLowerCase().indexOf(self.searchString().toLowerCase()) != -1) {
           possibleShops.push(self.locations()[i]);
           self.locations()[i].toggleMarker(map);
-        } else {
+        }
+        else {
           self.locations()[i].toggleMarker();
         }
     }
@@ -78,6 +87,10 @@ var ViewModel = function() {
     });
   });
 
+  //Actually create the pop up window for each coffee shop
+  self.infowindow = new google.maps.InfoWindow();
+  self.infowindow.setContent(popupInfo);
+
   //Now to animate the markers
   self.handleClick = function(coffeeShop) {
     //Zoom in when clicked (only to 18, any more is jarring)
@@ -92,6 +105,10 @@ var ViewModel = function() {
         coffeeShop.marker.setAnimation(null);
       },
     800);
+
+    //Lastly open the pop up box for the marker
+    self.infowindow.open(map, coffeeShop.marker);
+    $('#popupTitle').text(coffeeShop.name());
   };
 
 };

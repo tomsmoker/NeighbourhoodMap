@@ -21,6 +21,19 @@ html {
 	overflow-y: scroll;
 }
 
+/* Setting the style for the pop up description box */
+.popup {
+	padding: 2em;
+}
+
+/* Styling the pop up name */
+.popupTitle {
+	font-family: miso;
+	font-size: 20;
+	text-align: center;
+	margin: 0 0 5px 0;
+}
+
 input {
 	width: 80%;
 	margin: auto;

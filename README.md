@@ -8,11 +8,13 @@ Need to initialise a model: Pick ten coffee shops or so (Done)(Might add more la
 Add map markers (Done)
 Need to be able to search and filter map locations (Done)
 Implement a list view (Done)
+Make map markers clickable (Done)
+Open a pop up box for each marker when clicked (Done)
 
 TODO
 
-Make map markers clickable and viewable APIs
+Populate pop up box with external info
 AJAX Requests
-- API: Instagram (TBD)
-- Maybe one more (yelp? zomato?)
+- API: Instagram
+- API: Zomato
 Make look nicer via CSS
