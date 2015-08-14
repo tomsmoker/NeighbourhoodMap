@@ -43,7 +43,11 @@ var CoffeeShop = function(data) {
 //Create the basic structure of the pop up box, to use later
 var popupInfo =
   "<div id='popup' class='popup'>" +
+    "<div>"  +
     "<h2 id='popupTitle' class='popupTitle'></h2>" +
+    "</div>" +
+    "<div>"  +
+    "<h2 id='popupFave' class='popupFave'></h2>" +
     "</div>" +
   "</div>";
 
@@ -109,6 +113,7 @@ var ViewModel = function() {
     //Lastly open the pop up box for the marker
     self.infowindow.open(map, coffeeShop.marker);
     $('#popupTitle').text(coffeeShop.name());
+    $('#popupFave').text(coffeeShop.fave());
   };
 
 };
