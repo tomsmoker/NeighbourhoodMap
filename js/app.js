@@ -43,12 +43,8 @@ var CoffeeShop = function(data) {
 //Create the basic structure of the pop up box, to use later
 var popupInfo =
   "<div id='popup' class='popup'>" +
-    "<div>"  +
     "<h2 id='popupTitle' class='popupTitle'></h2>" +
-    "</div>" +
-    "<div>"  +
-    "<h2 id='popupFave' class='popupFave'></h2>" +
-    "</div>" +
+    "<h3 id='popupFave' class='popupFave'></h3>" +
   "</div>";
 
 //Making sure I dissociate the worries
