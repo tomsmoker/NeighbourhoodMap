@@ -14,6 +14,7 @@ var map = new google.maps.Map(document.getElementById('google_map'), {
 var CoffeeShop = function(data) {
   var self     = this;
   self.name    = ko.observable(data.name);
+  self.fave    = ko.observable(data.fave);
   self.address = ko.observable(data.address);
   self.latLng  = ko.observable(new google.maps.LatLng(data.lat, data.lng));
   //Will have to put Instagram API in here at some point
