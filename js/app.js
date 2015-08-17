@@ -18,6 +18,7 @@ var CoffeeShop = function(data) {
   self.address = ko.observable(data.address);
   self.latLng  = ko.observable(new google.maps.LatLng(data.lat, data.lng));
   //Will have to put Instagram API in here at some point
+  //self.instaID = ko.observable(data.instaID);
 
   //Create markers for each coffee shop
   //Have them drop in when first opened
@@ -111,6 +112,12 @@ var ViewModel = function() {
     self.infowindow.open(map, coffeeShop.marker);
     $('#popupTitle').text(coffeeShop.name());
     $('#popupFave').text(coffeeShop.fave());
+
+    self.getInstaFeed = function(coffeeShop) {
+
+      //Need to populate this with all the instagram authentification
+
+    }
   };
 
 };
