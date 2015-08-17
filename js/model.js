@@ -9,8 +9,8 @@ var coffeeShops = [
   {
   	name: "Small Print",
   	address: "125 St Georges Terrace, Perth WA 6000",
-  	lat: -31.954965,
     fave: "long black",
+  	lat: -31.954965,
   	lng: 115.854671
   },
   {

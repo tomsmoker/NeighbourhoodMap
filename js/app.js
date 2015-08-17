@@ -47,6 +47,8 @@ var popupInfo =
   "<div id='popup' class='popup'>" +
     "<h2 id='popupTitle' class='popupTitle'></h2>" +
     "<h3 id='popupFave' class='popupFave'></h3>" +
+    "<h1>Popular Pictures</h1>" +
+    "<ul class='popular'></ul>" +
   "</div>";
 
 //Making sure I dissociate the worries
@@ -115,11 +117,18 @@ var ViewModel = function() {
 
     self.getInstaFeed = function(coffeeShop) {
 
-      //Need to populate this with all the instagram authentification
-
+      $.ajax({
+        type: "GET",
+        dataType: "jsonp",
+        cache: false,
+        url: "https://api.instagram.com/v1/media/popular?access_token=86d7a8db5137468888f71782569163b5",
+        success: function(data) {
+            $(".popular").append("<li><a target='_blank' href='" + data.data[i].link + "'><img src='" + data.data[i].images.low_resolution.url + "'></img></a></li>");
+          }
+        }
+      })
     }
   };
-
 };
 
 //Bringing it all together
