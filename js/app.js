@@ -123,7 +123,7 @@ var ViewModel = function() {
         cache: false,
         url: "https://api.instagram.com/v1/media/popular?access_token=86d7a8db5137468888f71782569163b5",
         success: function(data) {
-            $(".popular").append("<li><a target='_blank' href='" + data.data[i].link + "'><img src='" + data.data[i].images.low_resolution.url + "'></img></a></li>");
+            $(".popular").append("<li><a target='_blank' href='" + data.coffeeShop.link + "'><img src='" + data.coffeeShop.images.low_resolution.url + "'></img></a></li>");
           }
         }
       })
