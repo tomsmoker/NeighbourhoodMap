@@ -15,6 +15,7 @@ var CoffeeShop = function(data) {
   var self     = this;
   self.name    = ko.observable(data.name);
   self.fave    = ko.observable(data.fave);
+  self.tag     = ko.observable(data.tag);
   self.address = ko.observable(data.address);
   self.latLng  = ko.observable(new google.maps.LatLng(data.lat, data.lng));
   //Will have to put Instagram API in here at some point
@@ -47,8 +48,8 @@ var popupInfo =
   "<div id='popup' class='popup'>" +
     "<h2 id='popupTitle' class='popupTitle'></h2>" +
     "<h3 id='popupFave' class='popupFave'></h3>" +
-    "<h1>Popular Pictures</h1>" +
-    "<ul class='popular'></ul>" +
+    "<h1>Pictures</h1>" +
+    "<ul class='photos'></ul>" +
   "</div>";
 
 //Making sure I dissociate the worries
@@ -113,19 +114,30 @@ var ViewModel = function() {
     //Lastly open the pop up box for the marker
     self.infowindow.open(map, coffeeShop.marker);
     $('#popupTitle').text(coffeeShop.name());
-    $('#popupFave').text(coffeeShop.fave());
+    $('#popupFave') .text(coffeeShop.fave());
 
-    self.getInstaFeed = function(coffeeShop) {
+    //This is where the call is made to the Instagram API
+    self.getInstaFeed = function(feed) {
 
+      //Set initial variables so can build the correct URL for each coffeeshop
+      var hashtag  = coffeeShop.tag();
+      var ID       = '79ac5dd1949b4383a20057cc28497fff';
+      var URLBuild = "https://api.instagram.com/v1/tags/" + hashtag + "/media/recent?client_id=" + ID;
+
+      //AJAX call to Instagram
       $.ajax({
         type: "GET",
         dataType: "jsonp",
         cache: false,
-        url: "https://api.instagram.com/v1/media/popular?access_token=86d7a8db5137468888f71782569163b5",
+        url: URLBuild, //Can the correct URL be accessed here? Is that the issue?
         success: function(data) {
-            $(".popular").append("<li><a target='_blank' href='" + data.coffeeShop.link + "'><img src='" + data.coffeeShop.images.low_resolution.url + "'></img></a></li>");
+          //Get the first five photos
+          for (var i = 0; i < 6; i++) {
+            //I think this is where it's going wrong but not sure why
+            $(".photos").append("<li><a target='_blank' href='" + feed.data[i].link +
+              "'><img  src='" + feed.data[i].images.standard_resolution.url +"'></img></a></li>");
+            }
           }
-        }
       })
     }
   };
