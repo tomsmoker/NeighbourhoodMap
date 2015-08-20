@@ -47,14 +47,40 @@ input {
 	margin: auto;
 }
 
-ul {
+.list ul {
 	padding: 0 0 0 10px;
 }
 
-li {
+.list li {
 	margin: 0.8em 0 0 0;
 }
 
-li span {
+.list li span {
 	cursor: pointer;
+}
+
+.photos li {
+  display: inline-block;
+  width: 306px;
+  height: 306px;
+  margin: 0px 20px 20px 0px;
+}
+.photos{
+  width: 1004px;
+  margin: auto;
+}
+.photos h1 {
+  text-align: center;
+  font-family: miso;
+  font-size: 36px;
+  padding: 20px;
+  font-weight: bold;
+  color: #4F4F4F;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+}
+
+.photos img {
+  border-radius: 10px;
+  border: 1px solid #DEDEDE;
+  box-shadow: 1px 1px 3px rgba(0,0,0,0.3);
 }

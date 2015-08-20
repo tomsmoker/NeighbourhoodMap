@@ -122,7 +122,8 @@ var ViewModel = function() {
       //Set initial variables so can build the correct URL for each coffeeshop
       var hashtag  = coffeeShop.tag();
       var ID       = '79ac5dd1949b4383a20057cc28497fff';
-      var URLBuild = "https://api.instagram.com/v1/tags/" + hashtag + "/media/recent?client_id=" + ID;
+      var token    = '86d7a8db5137468888f71782569163b5';
+      var URLBuild = "https://api.instagram.com/v1/tags/" + hashtag + "/media/recent?client_id=" + ID + "&access_token=" + token;
 
       //AJAX call to Instagram
       $.ajax({
@@ -132,10 +133,12 @@ var ViewModel = function() {
         url: URLBuild, //Can the correct URL be accessed here? Is that the issue?
         success: function(data) {
           //Get the first five photos
+          console.log("sucess");
           for (var i = 0; i < 6; i++) {
             //I think this is where it's going wrong but not sure why
             $(".photos").append("<li><a target='_blank' href='" + feed.data[i].link +
               "'><img  src='" + feed.data[i].images.standard_resolution.url +"'></img></a></li>");
+            console.log(i);
             }
           }
       })

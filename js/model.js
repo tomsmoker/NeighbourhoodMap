@@ -5,7 +5,7 @@ var coffeeShops = [
     fave: "long mac",
   	lat: -31.9530869,
   	lng: 115.8533204,
-    tag: '#lowdowncoffee'
+    tag: 'lowdowncoffee'
   },
   {
   	name: "Small Print",
@@ -13,7 +13,7 @@ var coffeeShops = [
     fave: "long black",
   	lat: -31.954965,
   	lng: 115.854671,
-    tag: '#smallprintcoffee'
+    tag: 'smallprintcoffee'
   },
   {
   	name: "Standing Room Only",
@@ -21,7 +21,7 @@ var coffeeShops = [
     fave: "long mac",
   	lat: -31.9528473,
   	lng: 115.8550868,
-    tag: '#standingroomonlyperth'
+    tag: 'standingroomonlyperth'
   },
   {
   	name: "Velvet Espresso",
@@ -29,7 +29,7 @@ var coffeeShops = [
     fave: "long mac",
   	lat: -31.9537116,
   	lng: 115.8543291,
-    tag: '#velvetespresso'
+    tag: 'velvetespresso'
   },
   {
   	name: "Ristretto Espresso",
@@ -37,7 +37,7 @@ var coffeeShops = [
     fave: "double espresso",
   	lat: -31.954074,
   	lng: 115.855036,
-    tag: '#ristrettoperth'
+    tag: 'ristrettoperth'
   },
   {
   	name: "Driphouse",
@@ -45,7 +45,7 @@ var coffeeShops = [
     fave: "long mac",
   	lat: -31.95314,
   	lng: 115.8562336,
-    tag: '#driphouse'
+    tag: 'driphouse'
   },
   {
   	name: "Moana Coffee",
@@ -53,7 +53,7 @@ var coffeeShops = [
     fave: "long mac",
   	lat: -31.954314,
   	lng: 115.8600435,
-    tag: '#moanacoffee'
+    tag: 'moanacoffee'
   },
   {
   	name: "Willie Wagtail",
@@ -61,7 +61,7 @@ var coffeeShops = [
     fave: "long black",
   	lat: -31.951648,
   	lng: 115.8578971,
-    tag: '#williewagtailcoffee'
+    tag: 'williewagtailcoffee'
   },
   {
   	name: "Voltage Espresso",
@@ -69,7 +69,7 @@ var coffeeShops = [
     fave: "long black",
   	lat: -31.955158,
   	lng: 115.859048,
-    tag: '#voltageespresso'
+    tag: 'voltageespresso'
   },
   {
   	name: 'Cheeky Sparrow',
@@ -77,7 +77,7 @@ var coffeeShops = [
     fave: "long mac",
   	lat: -31.9523251,
   	lng: 115.8560175,
-    tag: '#cheekysparrow'
+    tag: 'cheekysparrow'
   }
 ];
 
