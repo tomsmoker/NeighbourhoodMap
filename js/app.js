@@ -119,7 +119,7 @@ var ViewModel = function() {
     $('#popupFave') .text(coffeeShop.fave());
 
     //This is where the call is made to the Instagram API
-    self.getInstaFeed = function(feed) {
+    self.getInstaFeed = ko.computed(function() {
 
       //Set initial variables so can build the correct URL for each coffeeshop
       var hashtag  = coffeeShop.tag();
@@ -137,12 +137,12 @@ var ViewModel = function() {
           //Get the first five photos
           for (var i = 0; i < 6; i++) {
             //I think this is where it's going wrong but not sure why
-            $(".photos").append("<li><a target='_blank' href='" + reponse.data[i].link +
-              "'><img  src='" + reponse.data[i].images.low_resolution.url +"'></img></a></li>");
+            $(".photos").append("<li><a target='_blank' href='" + response.data[i].link +
+              "'><img  src='" + response.data[i].images.low_resolution.url +"'></img></a></li>");
             }
           }
       })
-    }
+    })
   };
 };
 
