@@ -2,87 +2,108 @@
 
 body,
 html {
-	height: 100%;
-	width: 100%;
-	background-color: #FFFFFF;
-	color: #383838;
+    height: 100%;
+    width: 100%;
+    background-color: #ffffff;
+    color: #383838;
 }
 
 /* First setting the map styles */
 .map {
-	float: right;
-	height: 100%;
-	width: 85%;
+    float: right;
+    height: 100%;
+    width: 85%;
 }
 
 /* Filling the list in the space left over */
 .list {
-	width: 15%;
-	height: 50%;
-	float: right;
-	overflow-y: scroll;
+    width: 15%;
+    height: 50%;
+    float: right;
+    overflow-y: scroll;
 }
 
 /* Setting the style for the pop up description box */
 .popup {
-	padding: 2em;
+    padding: 2em;
 }
 
 /* Styling the pop up name */
 .popupTitle {
-	font-family: miso;
-	font-size: 20;
-	text-align: center;
-	margin: 0 0 5px 0;
+    font-family: miso;
+    font-size: 20 px;
+    text-align: center;
+    margin: 0 0 5px 0;
 }
 
 /* Styling the pop up favourite coffee */
-.popupFave{
-	font-family: miso;
-	font-size: 20;
-	text-align: center;
-	margin: 0 0 15px 0;
+.popupFave {
+    font-family: miso;
+    font-size: 20 px;
+    text-align: center;
+    margin: 0 0 15px 0;
+}
+
+.latestSnaps {
+    font-family: miso;
+    font-size: 20;
+    text-align: center;
+    margin: 0 0 15px 0;
 }
 
 input {
-	width: 80%;
-	margin: auto;
+    width: 80%;
+    margin: auto;
 }
 
 .list ul {
-	padding: 0 0 0 10px;
+    padding: 0 0 0 10px;
 }
 
 .list li {
-	margin: 0.8em 0 0 0;
+    margin: 0.8em 0 0 0;
 }
 
 .list li span {
-	cursor: pointer;
+    cursor: pointer;
 }
 
 .photos li {
-  display: inline-block;
-  width: 306px;
-  height: 306px;
-  margin: 0px 20px 20px 0px;
+    display: inline-block;
+    width: 306px;
+    height: 306px;
+    margin: 0px 20px 20px 0px;
 }
-.photos{
-  width: 1004px;
-  margin: auto;
+
+.photos {
+    width: 180px;
+    margin: 10px;
 }
+
 .photos h1 {
-  text-align: center;
-  font-family: 'miso';
-  font-size: 36px;
-  padding: 20px;
-  font-weight: bold;
-  color: #4F4F4F;
-  text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+    text-align: center;
+    font-family: "miso";
+    font-size: 36px;
+    padding: 20px;
+    font-weight: bold;
+    color: #4f4f4f;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
 }
 
 .photos img {
-  border-radius: 10px;
-  border: 1px solid #DEDEDE;
-  box-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+    border-radius: 10px;
+    border: 1px solid #dedede;
+    box-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+}
+
+@media (max-width: 780px) {
+    body {
+        font-size: 12px;
+    };
+}
+
+@media (max-width: 500px) {
+    body {
+        font-size: 9px;
+    };
 }

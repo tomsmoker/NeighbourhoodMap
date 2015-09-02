@@ -1,6 +1,8 @@
 //Main Javascript file for Neighbourhood Map Project for Udacity FEND
 //Author: Tom Smoker
 
+"use strict";
+
 //First thing done is to create the map (Set to Perth CBD)
 var map = new google.maps.Map(document.getElementById('google_map'), {
     zoom:  17,
@@ -9,6 +11,7 @@ var map = new google.maps.Map(document.getElementById('google_map'), {
       lng: 115.85705
     }
 });
+
 
 //Setting up each coffee shop as an item
 var CoffeeShop = function(data) {
@@ -49,7 +52,7 @@ var popupInfo =
     "<h2 id='popupTitle' class='popupTitle'></h2>" +
     "<h3 id='popupFave' class='popupFave'></h3>" +
     "<div>" +
-      "<h1>Pictures</h1>" +
+      "<h1 id='latestSnaps' class='latestSnaps'>Latest Snaps</h1>" +
       "<ul class='photos'></ul>" +
     "</div>" +
   "</div>";
@@ -72,7 +75,7 @@ var ViewModel = function() {
         locationLength = self.locations().length;
 
     //Making it look nice
-    for (i = 0; i < locationLength; i++) {
+    for (var i = 0; i < locationLength; i++) {
         if (self.locations()[i].name().toLowerCase().indexOf(self.searchString().toLowerCase()) != -1) {
           possibleShops.push(self.locations()[i]);
           self.locations()[i].toggleMarker(map);
@@ -100,6 +103,7 @@ var ViewModel = function() {
 
   //Now to animate the markers
   self.handleClick = function(coffeeShop) {
+
     //Zoom in when clicked (only to 18, any more is jarring)
     map.setZoom(18);
     //Still not sure if this is the best, but will do for now
@@ -116,7 +120,8 @@ var ViewModel = function() {
     //Lastly open the pop up box for the marker
     self.infowindow.open(map, coffeeShop.marker);
     $('#popupTitle').text(coffeeShop.name());
-    $('#popupFave') .text(coffeeShop.fave());
+    $('#popupFave') .text("My favourite: " + coffeeShop.fave());
+    $('#lastestSnaps') .text("Lastest Snaps");
 
     //This is where the call is made to the Instagram API
     self.getInstaFeed = ko.computed(function() {
@@ -135,13 +140,16 @@ var ViewModel = function() {
         url: URLBuild, //Can the correct URL be accessed here? Is that the issue?
         success: function(response) {
           //Get the first five photos
-          for (var i = 0; i < 6; i++) {
+          for (var i = 0; i < 1; i++) {
             //I think this is where it's going wrong but not sure why
             $(".photos").append("<li><a target='_blank' href='" + response.data[i].link +
               "'><img  src='" + response.data[i].images.low_resolution.url +"'></img></a></li>");
             }
           }
-      })
+      // if failed
+      }).fail(function(response, status, error) {
+      $('#popupTitle').text('Instagram feed could not be loaded');
+      });
     })
   };
 };
