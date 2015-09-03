@@ -19,6 +19,7 @@ var CoffeeShop = function(data) {
     self.name = ko.observable(data.name);
     self.fave = ko.observable(data.fave);
     self.tag = ko.observable(data.tag);
+    self.photos = ko.observableArray();
     self.address = ko.observable(data.address);
     self.latLng = ko.observable(new google.maps.LatLng(data.lat, data.lng));
     //Will have to put Instagram API in here at some point
@@ -46,21 +47,32 @@ var CoffeeShop = function(data) {
 };
 
 //Create the basic structure of the pop up box, to use later
-var popupInfo =
+var popupInfo = function(coffeeShop) {
+
     "<div id='popup' class='popup'>" +
     "<h2 id='popupTitle' class='popupTitle'></h2>" +
     "<h3 id='popupFave' class='popupFave'></h3>" +
     "<div>" +
     "<h1 id='latestSnaps' class='latestSnaps'>Latest Snaps</h1>" +
     "<ul class='photos'></ul>" +
+    "<img width='200' src='" + coffeeShop.photos()[0] + "'/>" +
     "</div>" +
     "</div>";
+};
 
 //Making sure I dissociate the worries
 var ViewModel = function() {
 
     var self = this;
     self.searchString = ko.observable('');
+
+    //Attempting to create variable names that can be accessed within the popupInfo function
+    $(function(coffeeShop){
+      $('#Title').val('coffeeshop.name');
+      $('#Fave').val('coffeeshop.fave');
+    });
+
+    var infowindow = new google.maps.InfoWindow(); //Declare the info window
 
     //Create an array to store the coffee shops
     self.locations = ko.observableArray([]);
@@ -88,47 +100,46 @@ var ViewModel = function() {
         });
     });
 
-    //Need to add a listener for markers to be clicked
+    //Iterate through each coffee shop to add information
     self.locations().forEach(function(coffeeShop) {
         google.maps.event.addListener(coffeeShop.marker, 'click', function() {
-            self.handleClick(coffeeShop);
-        });
-        google.maps.event.addListener(coffeeShop.marker, 'domready', function() {
-            self.handleClick(coffeeShop);
+
+            //Zoom in when clicked (only to 18, any more is jarring)
+            map.setZoom(18);
+
+            //Set map center to the marker
+            map.setCenter(coffeeShop.latLng());
+
+            //Bounce markers with a time out of 800
+            coffeeShop.marker.setAnimation(google.maps.Animation.BOUNCE);
+            setTimeout(
+                function() {
+                    coffeeShop.marker.setAnimation(null);
+                },
+                800);
+
+            //Actually create the pop up window for each coffee shop
+            self.infowindow = new google.maps.InfoWindow({
+            maxHeight: 200,
+            maxWidth:  200
+            });
+
+            //Populating the window with the preset HTML for each coffee shop
+            self.infowindow.setContent(popupInfo(coffeeShop));
+
+            //Lastly open the pop up box
+            self.infowindow.open(map, coffeeShop.marker);
+            //$('#popupTitle').text(coffeeShop.name());
+            //$('#popupFave').text("My favourite: " + coffeeShop.fave());
+            //$('#lastestSnaps').text("Lastest Snaps");
+
         });
     });
 
-    //Actually create the pop up window for each coffee shop
-    self.infowindow = new google.maps.InfoWindow({
-      maxHeight: 200,
-      maxWidth:  200
-    });
-    self.infowindow.setContent(popupInfo);
+    //This is where the call is made to the Instagram API
+    self.getInstaFeed = ko.computed(function() {
 
-    //Now to animate the markers
-    self.handleClick = function(coffeeShop) {
-
-        //Zoom in when clicked (only to 18, any more is jarring)
-        map.setZoom(18);
-        //Still not sure if this is the best, but will do for now
-        //Makes the whole experience very jolting
-        map.setCenter(coffeeShop.latLng());
-        //Bounce markers with a time out of 800
-        coffeeShop.marker.setAnimation(google.maps.Animation.BOUNCE);
-        setTimeout(
-            function() {
-                coffeeShop.marker.setAnimation(null);
-            },
-            800);
-
-        //Lastly open the pop up box for the marker
-        self.infowindow.open(map, coffeeShop.marker);
-        $('#popupTitle').text(coffeeShop.name());
-        $('#popupFave').text("My favourite: " + coffeeShop.fave());
-        $('#lastestSnaps').text("Lastest Snaps");
-
-        //This is where the call is made to the Instagram API
-        self.getInstaFeed = ko.computed(function() {
+        self.locations().forEach(function(coffeeShop) {
 
             //Set initial variables so can build the correct URL for each coffeeshop
             var hashtag = coffeeShop.tag();
@@ -143,19 +154,19 @@ var ViewModel = function() {
                 cache: false,
                 url: URLBuild, //Can the correct URL be accessed here? Is that the issue?
                 success: function(response) {
-                        //Get the first five photos
                         for (var i = 0; i < 1; i++) {
                             //I think this is where it's going wrong but not sure why
-                            $(".photos").append("<li><a target='_blank' href='" + response.data[i].link +
-                                "'><img  src='" + response.data[i].images.low_resolution.url + "'></img></a></li>");
+                            //$(".photos").append("<li><a target='_blank' href='" + response.data[i].link +
+                                //"'><img  src='" + response.data[i].images.low_resolution.url + "'></img></a></li>");
+                            coffeeShop.photos.push(response.data[i].images.standard_resolution.url);
                         }
                     }
-                    // if failed
+            //If it fails
             }).fail(function(response, status, error) {
                 $('#popupTitle').text('Instagram feed could not be loaded');
             });
-        })
-    };
+        });
+    });
 };
 
 //Bringing it all together
