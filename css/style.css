@@ -1,10 +1,9 @@
-@import url(http://fonts.googleapis.com/css?family=Miso);
 
 body,
 html {
     height: 100%;
     width: 100%;
-    background-color: #ffffff;
+    background-color: #fff;
     color: #383838;
 }
 
@@ -31,7 +30,7 @@ html {
 /* Styling the pop up name */
 .popupTitle {
     font-family: miso;
-    font-size: 20 px;
+    font-size: 25px;
     text-align: center;
     margin: 0 0 5px 0;
 }
@@ -39,14 +38,14 @@ html {
 /* Styling the pop up favourite coffee */
 .popupFave {
     font-family: miso;
-    font-size: 20 px;
+    font-size: 18px;
     text-align: center;
     margin: 0 0 15px 0;
 }
 
 .latestSnaps {
     font-family: miso;
-    font-size: 20;
+    font-size: 20px;
     text-align: center;
     margin: 0 0 15px 0;
 }
@@ -69,14 +68,14 @@ input {
 }
 
 .photos li {
-    display: inline-block;
-    width: 306px;
-    height: 306px;
+    display: inline;
+    width: 150px;
+    height: 200px;
     margin: 0px 20px 20px 0px;
 }
 
 .photos {
-    width: 180px;
+    width: 150px;
     margin: 10px;
 }
 
@@ -91,7 +90,8 @@ input {
 }
 
 .photos img {
-    border-radius: 10px;
+    border-radius: 2px;
+    width: 250px;
     border: 1px solid #dedede;
     box-shadow: 1px 1px 3px rgba(0,0,0,0.3);
 }
