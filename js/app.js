@@ -106,10 +106,7 @@ var ViewModel = function() {
     self.infowindow.setContent(popupInfo);
 
     //Now to animate the markers
-    self.infowindow.open(map, coffeeShop.marker);
     self.handleClick = function(coffeeShop) {
-
-        self.infowindow.close();
 
         //Zoom in when clicked (only to 18, any more is jarring)
         map.setZoom(18);
@@ -125,6 +122,7 @@ var ViewModel = function() {
             800);
 
         //Lastly open the pop up box for the marker
+        self.infowindow.open(map, coffeeShop.marker);
         $('#popupTitle').text(coffeeShop.name());
         $('#popupFave').text("My favourite: " + coffeeShop.fave());
         $('#lastestSnaps').text("Lastest Snaps");
@@ -145,7 +143,6 @@ var ViewModel = function() {
                 cache: false,
                 url: URLBuild, //Can the correct URL be accessed here? Is that the issue?
                 success: function(response) {
-                        self.infoWindow.close();
                         //Get the first five photos
                         for (var i = 0; i < 1; i++) {
                             //I think this is where it's going wrong but not sure why
