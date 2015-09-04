@@ -12,7 +12,6 @@ var map = new google.maps.Map(document.getElementById('google_map'), {
     }
 });
 
-
 //Setting up each coffee shop as an item
 var CoffeeShop = function(data) {
     var self = this;
@@ -22,8 +21,6 @@ var CoffeeShop = function(data) {
     self.photos = ko.observableArray();
     self.address = ko.observable(data.address);
     self.latLng = ko.observable(new google.maps.LatLng(data.lat, data.lng));
-    //Will have to put Instagram API in here at some point
-    //self.instaID = ko.observable(data.instaID);
 
     //Create markers for each coffee shop
     //Have them drop in when first opened
@@ -55,10 +52,14 @@ var popupInfo = function(coffeeShop) {
     "<div>" +
     "<h1 id='latestSnaps' class='latestSnaps'>Latest Snaps</h1>" +
     "<ul class='photos'></ul>" +
-    "<img width='200' src='" + coffeeShop.photos()[0] + "'/>" +
+    //"<img width='200' src='" + coffeeShop.photos()[0] + "'/>" +
     "</div>" +
-    "</div>";
+    "</div>"
 };
+
+var test = function() {
+    console.log("flag");
+}
 
 //Making sure I dissociate the worries
 var ViewModel = function() {
@@ -67,10 +68,10 @@ var ViewModel = function() {
     self.searchString = ko.observable('');
 
     //Attempting to create variable names that can be accessed within the popupInfo function
-    $(function(coffeeShop){
+    /*$(function(coffeeShop){
       $('#Title').val('coffeeshop.name');
       $('#Fave').val('coffeeshop.fave');
-    });
+    });*/
 
     var infowindow = new google.maps.InfoWindow(); //Declare the info window
 
@@ -125,7 +126,7 @@ var ViewModel = function() {
             });
 
             //Populating the window with the preset HTML for each coffee shop
-            self.infowindow.setContent(popupInfo(coffeeShop));
+            self.infowindow.setContent(test());
 
             //Lastly open the pop up box
             self.infowindow.open(map, coffeeShop.marker);
