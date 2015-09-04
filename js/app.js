@@ -14,13 +14,13 @@ var map = new google.maps.Map(document.getElementById('google_map'), {
 
 //Setting up each coffee shop as an item
 var CoffeeShop = function(data) {
-    var self = this;
-    self.name = ko.observable(data.name);
-    self.fave = ko.observable(data.fave);
-    self.tag = ko.observable(data.tag);
-    self.photos = ko.observableArray();
+    var self     = this;
+    self.name    = ko.observable(data.name);
+    self.fave    = ko.observable(data.fave);
+    self.tag     = ko.observable(data.tag);
+    self.photos  = ko.observableArray();
     self.address = ko.observable(data.address);
-    self.latLng = ko.observable(new google.maps.LatLng(data.lat, data.lng));
+    self.latLng  = ko.observable(new google.maps.LatLng(data.lat, data.lng));
 
     //Create markers for each coffee shop
     //Have them drop in when first opened
@@ -43,37 +43,31 @@ var CoffeeShop = function(data) {
     };
 };
 
-//Create the basic structure of the pop up box, to use later
+//Create the basic structure of the pop up box as a function to be called later
 var popupInfo = function(coffeeShop) {
 
-    "<div id='popup' class='popup'>" +
-    "<h2 id='popupTitle' class='popupTitle'></h2>" +
-    "<h3 id='popupFave' class='popupFave'></h3>" +
-    "<div>" +
-    "<h1 id='latestSnaps' class='latestSnaps'>Latest Snaps</h1>" +
-    "<ul class='photos'></ul>" +
-    //"<img width='200' src='" + coffeeShop.photos()[0] + "'/>" +
-    "</div>" +
-    "</div>"
+    return "<div id='popup' class='popup'>" +
+        "<h2 id='popupTitle' class='popupTitle'>" +
+        coffeeShop.name() + "</h2>" +
+        "<h3 id='popupFave' class='popupFave'>Favourite Coffee: " +
+        coffeeShop.fave() + "</h3>" +
+        "<div>" +
+        "<h1 id='latestSnaps' class='latestSnaps'>Latest Snaps</h1>" +
+        "<ul class='photos'></ul>" +
+        "<img width='200' src='" + coffeeShop.photos()[0] + "'/>" +
+        "</div>" +
+        "</div>"
 };
-
-var test = function() {
-    console.log("flag");
-}
 
 //Making sure I dissociate the worries
 var ViewModel = function() {
 
     var self = this;
+    //Create the string to be searched
     self.searchString = ko.observable('');
 
-    //Attempting to create variable names that can be accessed within the popupInfo function
-    /*$(function(coffeeShop){
-      $('#Title').val('coffeeshop.name');
-      $('#Fave').val('coffeeshop.fave');
-    });*/
-
-    var infowindow = new google.maps.InfoWindow(); //Declare the info window
+    //Declare the infowindow as a variable to be used later
+    var infowindow = new google.maps.InfoWindow();
 
     //Create an array to store the coffee shops
     self.locations = ko.observableArray([]);
@@ -121,25 +115,22 @@ var ViewModel = function() {
 
             //Actually create the pop up window for each coffee shop
             self.infowindow = new google.maps.InfoWindow({
-            maxHeight: 200,
-            maxWidth:  200
+                maxHeight: 150,
+                maxWidth: 200
             });
 
             //Populating the window with the preset HTML for each coffee shop
-            self.infowindow.setContent(test());
+            self.infowindow.setContent(popupInfo(coffeeShop));
 
             //Lastly open the pop up box
             self.infowindow.open(map, coffeeShop.marker);
-            //$('#popupTitle').text(coffeeShop.name());
-            //$('#popupFave').text("My favourite: " + coffeeShop.fave());
-            //$('#lastestSnaps').text("Lastest Snaps");
-
         });
     });
 
     //This is where the call is made to the Instagram API
     self.getInstaFeed = ko.computed(function() {
 
+        //Make the call for each coffee shop
         self.locations().forEach(function(coffeeShop) {
 
             //Set initial variables so can build the correct URL for each coffeeshop
@@ -153,16 +144,14 @@ var ViewModel = function() {
                 type: "GET",
                 dataType: "jsonp",
                 cache: false,
-                url: URLBuild, //Can the correct URL be accessed here? Is that the issue?
+                url: URLBuild,
                 success: function(response) {
                         for (var i = 0; i < 1; i++) {
-                            //I think this is where it's going wrong but not sure why
-                            //$(".photos").append("<li><a target='_blank' href='" + response.data[i].link +
-                                //"'><img  src='" + response.data[i].images.low_resolution.url + "'></img></a></li>");
+                            //Push the photo to the array created at the very beginning
                             coffeeShop.photos.push(response.data[i].images.standard_resolution.url);
                         }
                     }
-            //If it fails
+                    //If it fails
             }).fail(function(response, status, error) {
                 $('#popupTitle').text('Instagram feed could not be loaded');
             });

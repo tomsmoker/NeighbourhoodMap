@@ -25,6 +25,9 @@ html {
 /* Setting the style for the pop up description box */
 .popup {
     padding: 2em;
+    line-height: 1.35;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 /* Styling the pop up name */
