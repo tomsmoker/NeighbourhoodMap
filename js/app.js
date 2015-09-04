@@ -99,7 +99,7 @@ var ViewModel = function() {
     self.locations().forEach(function(coffeeShop) {
         google.maps.event.addListener(coffeeShop.marker, 'click', function() {
 
-            //Zoom in when clicked (only to 18, any more is jarring)
+            //Zoom in when clicked
             map.setZoom(18);
 
             //Set map center to the marker
@@ -151,7 +151,7 @@ var ViewModel = function() {
                             coffeeShop.photos.push(response.data[i].images.standard_resolution.url);
                         }
                     }
-                    //If it fails
+            //If it fails
             }).fail(function(response, status, error) {
                 $('#popupTitle').text('Instagram feed could not be loaded');
             });

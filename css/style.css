@@ -7,6 +7,16 @@ html {
     color: #383838;
 }
 
+/* Styling the top title */
+.topTitle{
+    font-family: miso;
+    font-size: 70px;
+    text-align: left;
+    margin: 0 0 5px 0;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
 /* First setting the map styles */
 .map {
     float: right;
@@ -16,10 +26,22 @@ html {
 
 /* Filling the list in the space left over */
 .list {
+    font-family: miso;
+    font-size: 20px;
     width: 15%;
-    height: 50%;
+    height: 100%;
     float: right;
     overflow-y: scroll;
+}
+
+/* Styling the title */
+.title{
+    font-family: miso;
+    font-size: 40px;
+    text-align: left;
+    margin: 0 0 5px 0;
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
 
 /* Setting the style for the pop up description box */
@@ -46,6 +68,7 @@ html {
     margin: 0 0 15px 0;
 }
 
+/* Styling the Latest Snaps text */
 .latestSnaps {
     font-family: miso;
     font-size: 20px;
@@ -98,6 +121,8 @@ input {
     border: 1px solid #dedede;
     box-shadow: 1px 1px 3px rgba(0,0,0,0.3);
 }
+
+/*Adding a bunch of media queries gathered from http://www.studiopress.com/design/website-respond-mobile-devices.html
 
 /* Smartphones (portrait and landscape) ----------- */
 @media only screen
