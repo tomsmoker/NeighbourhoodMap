@@ -97,35 +97,39 @@ var ViewModel = function() {
 
     //Iterate through each coffee shop to add information
     self.locations().forEach(function(coffeeShop) {
-        google.maps.event.addListener(coffeeShop.marker, 'click', function() {
-
-            //Zoom in when clicked
-            map.setZoom(18);
-
-            //Set map center to the marker
-            map.setCenter(coffeeShop.latLng());
-
-            //Bounce markers with a time out of 800
-            coffeeShop.marker.setAnimation(google.maps.Animation.BOUNCE);
-            setTimeout(
-                function() {
-                    coffeeShop.marker.setAnimation(null);
-                },
-                800);
-
-            //Actually create the pop up window for each coffee shop
-            self.infowindow = new google.maps.InfoWindow({
-                maxHeight: 150,
-                maxWidth: 200
+            google.maps.event.addListener(coffeeShop.marker, 'click', function() {
+                self.clickHandler(coffeeShop);
             });
-
-            //Populating the window with the preset HTML for each coffee shop
-            self.infowindow.setContent(popupInfo(coffeeShop));
-
-            //Lastly open the pop up box
-            self.infowindow.open(map, coffeeShop.marker);
-        });
     });
+
+    //Add this function so the list items are clickable
+    self.clickHandler = function(coffeeShop){
+                //Zoom in when clicked
+                map.setZoom(18);
+
+                //Set map center to the marker
+                map.setCenter(coffeeShop.latLng());
+
+                //Bounce markers with a time out of 800
+                coffeeShop.marker.setAnimation(google.maps.Animation.BOUNCE);
+                setTimeout(
+                    function() {
+                        coffeeShop.marker.setAnimation(null);
+                    },
+                    800);
+
+                //Actually create the pop up window for each coffee shop
+                self.infowindow = new google.maps.InfoWindow({
+                    maxHeight: 150,
+                    maxWidth: 200
+                });
+
+                //Populating the window with the preset HTML for each coffee shop
+                self.infowindow.setContent(popupInfo(coffeeShop));
+
+                //Lastly open the pop up box
+                self.infowindow.open(map, coffeeShop.marker);
+    };
 
     //This is where the call is made to the Instagram API
     self.getInstaFeed = ko.computed(function() {

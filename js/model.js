@@ -69,4 +69,7 @@ var coffeeShops = [{
     lat: -31.9523251,
     lng: 115.8560175,
     tag: 'cheekysparrow'
-}];
+}/*, {
+
+    The standard
+}*/];
