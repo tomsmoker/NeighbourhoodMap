@@ -1,4 +1,3 @@
-
 //Main Javascript file for Neighbourhood Map Project for Udacity FEND
 //Author: Tom Smoker
 "use strict";

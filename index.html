@@ -3,27 +3,41 @@
     <head lang="en">
         <meta charset="utf-8">
         <title>Perth Coffee</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <meta name="viewport"  content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
         <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/simple-sidebar.css" >
     </head>
     <body>
-        <div class="map" id="google_map"></div>
-        <div class="list">
-            <div class="search">
-                <h1 class="topTitle">Perth Coffee Map</h1>
-                <h2 class="title">Coffeeshops:</h2>
-                <input type="text" data-bind="textInput: searchString" placeholder="Filter results" />
-            </div>
-            <div class="places">
-                <ul data-bind="foreach: filteredLocations">
-                    <li><span data-bind="text: name, click: $parent.clickHandler" /></li>
-                </ul>
+        <div id="wrapper">
+            <div id="sidebar-wrapper">
+                <div class="list" >
+                    <div class="search">
+                        <h1 class="topTitle">Perth Coffee Map</h1>
+                        <h2 class="title">Coffeeshops:</h2>
+                        <input type="text" data-bind="textInput: searchString" placeholder="Filter results" />
+                    </div>
+                    <div class="places">
+                        <ul class="sidebar-nav" data-bind="foreach: filteredLocations">
+                            <li><span data-bind="text: name, click: $parent.clickHandler" /></li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
+        <div class="map"  id="google_map"></div>
         <script src="js/libraries/knockout-3.3.0.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD1z0leMsqILGNbXvZ-21ODoVwGob_a5W8"></script>
         <script src="js/model.js"></script>
         <script src="js/app.js"></script>
+        <!-- Menu Toggle Script -->
+        <script>
+        $("#menu-toggle").click(function(e) {
+            e.preventDefault();
+            $("#wrapper").toggleClass("toggled");
+            });
+        </script>
     </body>
 </html>
