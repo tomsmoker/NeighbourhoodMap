@@ -9,7 +9,7 @@ html {
 /* Styling the top title */
 .topTitle {
     font-family: miso;
-    font-size: 70px;
+    font-size: 75px;
     text-align: left;
     margin: 0 0 5px 0;
     padding-top: 20px;
@@ -27,10 +27,10 @@ html {
 .list {
     font-family: miso;
     font-size: 20px;
-    width: 15%;
+    width: auto;
     height: 100%;
     float: left;
-    overflow-y: scroll;
+    padding-left: 10px;
 }
 
 /* Styling the title */
