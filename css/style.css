@@ -54,7 +54,7 @@ html {
 /* Styling the pop up name */
 .popupTitle {
     font-family: miso;
-    font-size: 25px;
+    font-size: 30px;
     text-align: center;
     margin: 0 0 5px 0;
 }
@@ -70,7 +70,7 @@ html {
 /* Styling the Latest Snaps text */
 .latestSnaps {
     font-family: miso;
-    font-size: 20px;
+    font-size: 25px;
     text-align: center;
     margin: 0 0 15px 0;
 }

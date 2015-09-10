@@ -48,8 +48,8 @@ var popupInfo = function(coffeeShop) {
     return "<div id='popup' class='popup'>" +
         "<h2 id='popupTitle' class='popupTitle'>" +
         coffeeShop.name() + "</h2>" +
-        "<h3 id='popupFave' class='popupFave'>Favourite Coffee: " +
-        coffeeShop.fave() + "</h3>" +
+        "<h3 id='popupFave' class='popupFave'>Favourite Coffee: </h3>" +
+        "<h3 id='popupFave' class='popupFave'>" + coffeeShop.fave() + "</h3>" +
         "<div>" +
         "<h1 id='latestSnaps' class='latestSnaps'>Latest Snaps</h1>" +
         "<ul class='photos'></ul>" +
