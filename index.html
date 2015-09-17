@@ -10,6 +10,7 @@
     </head>
     <body>
         <div id="wrapper">
+            <!-- Start wrapping the sidebar -->
             <div id="sidebar-wrapper">
                 <div class="list" >
                     <div class="search">
@@ -24,8 +25,14 @@
                     </div>
                 </div>
             </div>
+            <!-- Now wrap the map -->
+            <div id="page_content_wrapper">
+                <div style="position: absolute; z-index: 3">
+                    <a href="#menu-toggle" class="btn btn-default pull-right" id="menu-toggle">Show Menu</a>
+                    </div>
+                <div class="map" id="google_map"></div>
+            </div>
         </div>
-        <div class="map"  id="google_map"></div>
         <script src="js/libraries/knockout-3.3.0.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>

@@ -6,7 +6,12 @@
 
 /* Toggle Styles */
 
+body {
+    display:table;
+}
+
 #wrapper {
+    display: table-row;
     padding-left: 0;
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
@@ -20,8 +25,9 @@
 }
 
 #sidebar-wrapper {
-    z-index: 1000;
+    display:table-cell;
     position: fixed;
+    z-index: 1000;
     left: 250px;
     width: 0;
     height: 100%;
@@ -39,8 +45,9 @@
 }
 
 #page-content-wrapper {
+    display:table-cell;
     width: 100%;
-    position: absolute;
+    position: relative;
     padding: 15px;
 }
 

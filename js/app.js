@@ -5,6 +5,7 @@
 //First thing done is to create the map (Set to Perth CBD)
 var map = new google.maps.Map(document.getElementById('google_map'), {
     zoom: 17,
+    disableDefaultUI: true,
     center: {
         lat: -31.95351,
         lng: 115.85705
