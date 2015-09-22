@@ -4,7 +4,7 @@
 
 //First thing done is to create the map (Set to Perth CBD)
 var map = new google.maps.Map(document.getElementById('google_map'), {
-    zoom: 17,
+    zoom: 16,
     disableDefaultUI: true,
     center: {
         lat: -31.95351,
@@ -32,13 +32,13 @@ var CoffeeShop = function(data) {
     });
 
     //This displays the marker (nested ifs because it was flicking on and off)
-    self.toggleMarker = function(value) {
+    CoffeeShop.prototype.toggleMarker = function(value) {
         if (value === map) {
-            if (self.marker.map === null) {
-                self.marker.setMap(map);
+            if (this.marker.map === null) {
+                this.marker.setMap(map);
             }
         } else {
-            self.marker.setMap(null);
+            this.marker.setMap(null);
         }
     };
 };
@@ -67,7 +67,7 @@ var ViewModel = function() {
     self.searchString = ko.observable('');
 
     //Declare the infowindow as a variable to be used later
-    var infowindow = new google.maps.InfoWindow();
+    self.infowindow = new google.maps.InfoWindow();
 
     //Create an array to store the coffee shops
     self.locations = ko.observableArray([]);
@@ -118,6 +118,9 @@ var ViewModel = function() {
                     },
                     800);
 
+                //Close the infowindow if open previously
+                self.infowindow.close();
+
                 //Actually create the pop up window for each coffee shop
                 self.infowindow = new google.maps.InfoWindow({
                     maxHeight: 150,
@@ -128,7 +131,12 @@ var ViewModel = function() {
                 self.infowindow.setContent(popupInfo(coffeeShop));
 
                 //Lastly open the pop up box
-                self.infowindow.open(map, coffeeShop.marker);
+                setTimeout(
+                    function() {
+                        self.infowindow.open(map, coffeeShop.marker);
+                    },
+                800);
+
     };
 
     //This is where the call is made to the Instagram API
@@ -152,7 +160,7 @@ var ViewModel = function() {
                 success: function(response) {
                         for (var i = 0; i < 1; i++) {
                             //Push the photo to the array created at the very beginning
-                            coffeeShop.photos.push(response.data[i].images.standard_resolution.url);
+                            coffeeShop.photos.push(response.data[i].images.low_resolution.url);
                         }
                     }
             //If it fails
