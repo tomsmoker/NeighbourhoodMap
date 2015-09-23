@@ -160,7 +160,7 @@ var ViewModel = function() {
                 success: function(response) {
                         for (var i = 0; i < 1; i++) {
                             //Push the photo to the array created at the very beginning
-                            coffeeShop.photos.push(response.data[i].images.low_resolution.url);
+                            coffeeShop.photos.push(response.data[i].images.standard_resolution.url);
                         }
                     }
             //If it fails
